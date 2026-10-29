@@ -58,7 +58,7 @@ $notice = flash('users_notice');
     <link rel="stylesheet" href="../assets/auth.css">
 </head>
 <body>
-<?php render_navbar($user, '../dashboard.php', '../logout.php', 'users.php'); ?>
+<?php render_navbar($user, '../dashboard.php', '../logout.php', 'users.php', '../profile.php'); ?>
 <main class="auth-page">
     <section class="auth-card auth-card-wide" aria-labelledby="page-title">
         <p class="eyebrow">ADMIN</p>

@@ -20,7 +20,7 @@ $notice = flash('auth_notice');
     <link rel="stylesheet" href="assets/auth.css">
 </head>
 <body>
-<?php render_navbar($user, 'dashboard.php', 'logout.php', 'admin/users.php'); ?>
+<?php render_navbar($user, 'dashboard.php', 'logout.php', 'admin/users.php', 'profile.php'); ?>
 <main class="auth-page">
     <section class="auth-card" aria-labelledby="page-title">
         <p class="eyebrow">SWD AUTH</p>

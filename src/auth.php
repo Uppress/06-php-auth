@@ -116,13 +116,20 @@ function login_lockout_minutes(string $email, string $ip): ?int
     return (int) $attempts[4]['minutes_left'];
 }
 
-function render_navbar(array $user, string $dashboardUrl, string $logoutUrl, string $adminUsersUrl): void
+function render_navbar(
+    array $user,
+    string $dashboardUrl,
+    string $logoutUrl,
+    string $adminUsersUrl,
+    string $profileUrl = 'profile.php'
+): void
 {
     ?>
     <header class="site-header">
         <nav class="site-nav" aria-label="Main navigation">
             <a class="brand-link" href="<?= e($dashboardUrl) ?>">SWD AUTH</a>
             <div class="nav-links">
+                <a href="<?= e($profileUrl) ?>">Profile</a>
                 <?php if (($user['role'] ?? null) === 'admin'): ?>
                     <a href="<?= e($adminUsersUrl) ?>">Admin</a>
                 <?php endif; ?>

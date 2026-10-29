@@ -112,6 +112,17 @@ h1 {
     line-height: 1.5;
 }
 
+.form-section + .form-section {
+    margin-top: 32px;
+    padding-top: 26px;
+    border-top: 1px solid #e6e9f0;
+}
+
+.form-section h2 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
 .notice {
     margin-bottom: 16px;
     padding: 12px 14px;
