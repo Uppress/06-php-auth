@@ -17,6 +17,51 @@ body {
     margin: 0;
 }
 
+.site-header {
+    border-bottom: 1px solid #e6e9f0;
+    background: #fff;
+}
+
+.site-nav {
+    display: flex;
+    width: min(100% - 32px, 1040px);
+    min-height: 64px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand-link,
+.nav-links a,
+.nav-button {
+    color: #293d91;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links form {
+    display: block;
+}
+
+.nav-button {
+    min-height: auto;
+    margin: 0;
+    padding: 8px 12px;
+    border: 1px solid #cfd5e1;
+    background: #fff;
+    color: #172033;
+}
+
+.nav-button:hover {
+    background: #f3f5f9;
+}
+
 .auth-page {
     display: grid;
     min-height: 100vh;
@@ -31,6 +76,20 @@ body {
     border-radius: 16px;
     background: #fff;
     box-shadow: 0 16px 48px rgb(23 32 51 / 8%);
+}
+
+.auth-card-wide {
+    width: min(100%, 1080px);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
 }
 
 .eyebrow {
@@ -150,6 +209,44 @@ button:focus-visible {
 .account-details dd {
     margin: 0;
     overflow-wrap: anywhere;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.users-table th,
+.users-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e6e9f0;
+    vertical-align: middle;
+}
+
+.users-table th {
+    color: #667085;
+    font-size: 0.8rem;
+}
+
+.users-table select {
+    min-height: 38px;
+    padding: 6px 8px;
+    border: 1px solid #cfd5e1;
+    border-radius: 6px;
+    background: #fff;
+    font: inherit;
+}
+
+.users-table button {
+    min-height: 38px;
+    margin: 0 0 0 6px;
+    padding: 6px 10px;
 }
 
 .alert {

@@ -13,8 +13,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = is_string($_POST['email'] ?? null) ? strtolower(trim($_POST['email'])) : '';
         $password = $_POST['password'] ?? null;
         $_SESSION['_old_email'] = $email;
+        $ip = $_SERVER['REMOTE_ADDR'] ?? '';
 
-        if (is_string($password)) {
+        if (!is_string($ip) || filter_var($ip, FILTER_VALIDATE_IP) === false) {
+            throw new RuntimeException('A valid client IP address is required for login throttling.');
+        }
+
+        $attemptEmail = strlen($email) <= 160
+            ? $email
+            : substr($email, 0, 95) . '#' . hash('sha256', $email);
+        $lockout = login_lockout_minutes($attemptEmail, $ip);
+
+        if ($lockout !== null) {
+            flash('login_error', 'Too many attempts, try again in ' . $lockout . ' minutes');
+            redirect('login.php');
+        }
+
+        if (is_string($password) && strlen($email) <= 160) {
             $statement = db()->prepare(
                 'SELECT id, password_hash, role FROM users WHERE email = :email LIMIT 1'
             );
@@ -29,9 +44,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             || !is_string($password)
             || !password_verify($password, (string) $user['password_hash'])
         ) {
-            flash('login_error', 'Invalid email or password');
+            $statement = db()->prepare('INSERT INTO login_attempts (email, ip) VALUES (:email, :ip)');
+            $statement->execute(['email' => $attemptEmail, 'ip' => $ip]);
+
+            $lockout = login_lockout_minutes($attemptEmail, $ip);
+            flash(
+                'login_error',
+                $lockout === null
+                    ? 'Invalid email or password'
+                    : 'Too many attempts, try again in ' . $lockout . ' minutes'
+            );
             redirect('login.php');
         }
+
+        $statement = db()->prepare('DELETE FROM login_attempts WHERE email = :email AND ip = :ip');
+        $statement->execute(['email' => $attemptEmail, 'ip' => $ip]);
 
         $newPasswordHash = null;
         if (password_needs_rehash((string) $user['password_hash'], PASSWORD_DEFAULT)) {

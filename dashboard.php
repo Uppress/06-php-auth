@@ -20,6 +20,7 @@ $notice = flash('auth_notice');
     <link rel="stylesheet" href="assets/auth.css">
 </head>
 <body>
+<?php render_navbar($user, 'dashboard.php', 'logout.php', 'admin/users.php'); ?>
 <main class="auth-page">
     <section class="auth-card" aria-labelledby="page-title">
         <p class="eyebrow">SWD AUTH</p>
@@ -49,10 +50,6 @@ $notice = flash('auth_notice');
             </div>
         </dl>
 
-        <form method="post" action="logout.php">
-            <?= csrf_field() ?>
-            <button type="submit">Log out</button>
-        </form>
     </section>
 </main>
 </body>
