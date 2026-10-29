@@ -53,6 +53,17 @@ h1 {
     line-height: 1.5;
 }
 
+.notice {
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border: 1px solid #c9d5fa;
+    border-radius: 8px;
+    background: #f2f5ff;
+    color: #293d91;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
 form {
     display: grid;
 }
@@ -105,6 +116,40 @@ button:hover {
 button:focus-visible {
     outline: 3px solid rgb(82 104 216 / 35%);
     outline-offset: 3px;
+}
+
+.auth-link {
+    margin: 20px 0 0;
+    color: #667085;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.auth-link a {
+    color: #4258c7;
+    font-weight: 650;
+}
+
+.account-details {
+    display: grid;
+    gap: 16px;
+    margin: 28px 0;
+}
+
+.account-details div {
+    display: grid;
+    gap: 4px;
+}
+
+.account-details dt {
+    color: #667085;
+    font-size: 0.8rem;
+    font-weight: 650;
+}
+
+.account-details dd {
+    margin: 0;
+    overflow-wrap: anywhere;
 }
 
 .alert {

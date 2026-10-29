@@ -8,6 +8,7 @@ ini_set('display_startup_errors', '1');
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/src/helpers.php';
 require_once __DIR__ . '/src/csrf.php';
+require_once __DIR__ . '/src/auth.php';
 
 ini_set('session.use_strict_mode', '1');
 ini_set('session.use_only_cookies', '1');
@@ -24,3 +25,16 @@ session_set_cookie_params([
     'samesite' => 'Lax',
 ]);
 session_start();
+
+if (isset($_SESSION['user_id'])) {
+    $lastActivity = $_SESSION['last_activity'] ?? null;
+
+    if (!is_int($lastActivity) || $lastActivity <= time() - 1800) {
+        auth_destroy_session();
+        session_id('');
+        session_start();
+        flash('auth_notice', 'You were signed out after 30 minutes of inactivity.');
+    } else {
+        $_SESSION['last_activity'] = time();
+    }
+}

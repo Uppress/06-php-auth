@@ -97,6 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = (int) $connection->lastInsertId();
         $_SESSION['user_name'] = $name;
         $_SESSION['user_role'] = 'user';
+        $_SESSION['last_activity'] = time();
 
         redirect('dashboard.php');
     }
@@ -147,6 +148,7 @@ unset($_SESSION['_old']);
 
             <button type="submit">Create account</button>
         </form>
+        <p class="auth-link">Already have an account? <a href="login.php">Log in</a></p>
     </section>
 </main>
 </body>
