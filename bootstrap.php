@@ -1,0 +1,26 @@
+<?php
+declare(strict_types=1);
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+
+require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/src/helpers.php';
+require_once __DIR__ . '/src/csrf.php';
+
+ini_set('session.use_strict_mode', '1');
+ini_set('session.use_only_cookies', '1');
+ini_set('session.use_trans_sid', '0');
+
+$isHttps = isset($_SERVER['HTTPS']) && strtolower((string) $_SERVER['HTTPS']) !== 'off';
+
+session_name('SWDSESSID');
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'secure' => $isHttps,
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+session_start();
